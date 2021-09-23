@@ -1,0 +1,204 @@
+@import url("./reset.css");
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("./fonts/Gilroy-Bold.ttf") format("truetype")
+}
+@font-face {
+  font-family: "Gilroy-Regular";
+  src: url("./fonts/gilroy-regular.ttf") format("truetype")
+}
+body {
+  overflow: hidden;
+}
+.app {
+  position: relative;
+  height: 100vh;
+}
+.header__title {
+  width: 113px;
+  height: 41px;
+
+  padding: 60px 40px 49px;
+  font-family: "Gilroy";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 41px;
+
+  /* identical to box height, or 146% */
+  letter-spacing: 0.01em;
+
+  color: #1C1C1C;
+}
+
+.add-note {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  right: 40px;
+  bottom: 40px;
+
+  background: #FFFFFF;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  border: none;
+  z-index: 1;
+}
+
+.add-note::before {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  left: 19px;
+  top: 19px;
+  background: url("./images/Vector.png");
+  display: block;
+  content: ""
+}
+
+.form-notes {
+  position: fixed;
+  width: 100%;
+  height: 0;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 40px 40px 0px 0px;
+  transition: height .75s linear;
+  z-index: 1;
+}
+.form-notes--active {
+  height: calc(100% - 132px);
+  transition: height .75s linear;
+}
+.form-notes__text {
+  width: calc(100% - 80px);
+  height: 160px;
+  margin: 0 40px 30px;
+
+  border: 2px solid #E6E6E6;
+  box-sizing: border-box;
+  border-radius: 10px;
+
+  font-family: "Gilroy-Regular";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+
+  letter-spacing: 0.01em;
+  color: #999999;
+  padding: 14px 19px;
+}
+.form-notes-manage {
+  margin: 0 42px;
+  display: flex;
+}
+.form-notes__btn {
+  width: 137px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  padding: 9px 0;
+  text-align: center;
+  font: normal 300 16px "Gilroy-Regular";
+  line-height: 140%;
+  letter-spacing: 0.01em;
+}
+.form-notes__btn--close {
+  color: #4D4D4D;
+  background: #F2F2F2;
+}
+.form-notes__btn--add {
+  color: #ffffff;
+  background: #23A3FF;
+  margin-left: 21px
+}
+
+.edit-notes {
+  position: absolute;
+  width: 86px;
+  height: 27px;
+  right: 40px;
+  top: 67px;
+
+  background: #F2F2F2;
+  border-radius: 4px;
+
+  font: normal 500 14px "Gilroy-Regular";
+  line-height: 140%;
+
+  letter-spacing: 0.01em;
+  color: #000000;
+  border: none;
+}
+.list-to-do {
+  overflow: auto;
+  height: calc(100vh - 150px);
+}
+.list-to-do__elem, .msg-alert {
+  margin: 0 40px 31px;
+  font-family: "Gilroy-Regular";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 120%;
+
+  /* identical to box height, or 22px */
+  letter-spacing: 0.01em;
+
+  color: #000000;
+}
+.list-to-do__check {
+  display: none;
+}
+.list-to-do__check:checked ~ .list-to-do__text-wrap > .list-to-do__text {
+  color: rgba(0, 0, 0, 0.6)
+}
+.list-to-do__text-wrap {
+  display: flex;
+  align-items: center;
+  max-width: max-content;
+  cursor: pointer;
+}
+.list-to-do__link {
+  cursor: pointer;
+}
+.list-to-do__checkbox {
+  width: 22px;
+  height: 22px;
+  position: relative;
+  border: 2px solid #D9D9D9;
+  box-sizing: border-box;
+  border-radius: 11px;
+  margin-right: 14px;
+  flex-shrink: 0;
+}
+.list-to-do__check:checked ~ .list-to-do__text-wrap > .list-to-do__checkbox::before {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  left: 3px;
+  top: 3px;
+
+  background: #23A3FF;
+  display: block;
+  content: "";
+  border-radius: 6px;
+}
+.list-to-do__remove {
+  width: 22px;
+  height: 22px;
+  background: url("./images/removeIcon.png");
+  margin-right: 14px;
+  flex-shrink: 0;
+}
+.form-notes__text.form-notes__text--alert {
+  border-color: #ff1744;
+}
+.form-notes-wrap {
+  margin-top: 42px;
+}
