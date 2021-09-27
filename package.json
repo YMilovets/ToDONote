@@ -17,7 +17,7 @@
   },
   "scripts": {
     "pretodo": "npm run build",
-    "todo": "gh-pages -d build",
+    "todo": "gh-pages -b main -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
