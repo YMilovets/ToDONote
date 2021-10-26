@@ -1,40 +1,43 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import "./App.css";
 import FormAddNodes from "./components/formAddNotes";
 import ListToDoNotes from "./components/listToDoNotes"
 import ListToEditNotes from "./components/listToEditNotes"
 import Header from "./components/header"
+import Context from "./contexts/context"
+
 function App() {
-  const dispatch = useDispatch();
-  const list = useSelector(state => state.addNoteReducer.listNotes);
-  const idPos = useSelector(state => state.addNoteReducer.id);
-  const [isEdit, setIsEdit] = useState(false);
-  const [isUpdate, setIsUpdate] = useState(false);
-  const [editMode, setEditMode] = useState(false);
-  const [id, setID] = useState(0);
-  const [itemNote, setItemNote] = useState({});
-
+  const dispatch = useDispatch(); 
+  //Выборка свойств из состояния хранилища state
+  //listNotes - массив хранения объектов задач todo со свойствами {id, result, checked}
+  const {listNotes: list, id: idPos} = useSelector(state => state.addNoteReducer);
+  const [isEditor, setIsEditor] = useState(false);  //состояние запуска текстового редактора
+  const [editMode, setEditMode] = useState(false);  //режим состояния редактирования
+  useEffect(() => {  
+    return () => {    
+      dispatch({type: "SAVE_DATA_STATE"})
+    }
+  })
+  //Обработчик события запуска формы текстового редактора
   const onAddForm = () => {
-    setIsEdit(true);
+    setIsEditor(true);
   }
-  const onEditMode = () => {
-    editMode ? setEditMode(false) : setEditMode(true);
-  }
+  //Состояние кнопки активации режима редактирования
   const stateEditBtn = editMode ? "Отменить" : "Править";
-
   return (
-    <div className="app">
-      <Header {...{list, onEditMode, stateEditBtn}} />
-      {list.length ? 
-        (editMode ? <ListToEditNotes {...{isUpdate, id, list, dispatch, itemNote, setItemNote, setEditMode, setIsUpdate, setID}}/> : 
-          <ListToDoNotes {...{list, dispatch}} />) : 
-        <p className="msg-alert">Список задач пуст</p>}
-      {!editMode ? <button onClick={onAddForm} className="add-note"></button> : ""}
-      
-      <FormAddNodes {...{isEdit, dispatch, list, setIsEdit, idPos}}/>
-    </div>
+    <Context.Provider value={{list, dispatch, isEditor, setIsEditor, idPos, setEditMode, editMode}}>
+      <div className="app">
+        <Header {...{stateEditBtn}} />
+        {list.length ? 
+          (editMode ? <ListToEditNotes /> : 
+            <ListToDoNotes />) : 
+          <p className="msg-alert">Список задач пуст</p>}
+        {!editMode && <button onClick={onAddForm} className="add-note"></button>}
+        
+        <FormAddNodes />
+      </div>
+    </Context.Provider>
   );
 }
-
 export default App;

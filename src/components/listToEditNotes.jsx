@@ -1,20 +1,25 @@
 import FormUpdateNotes from "../components/formUpdateNotes"
 import deleteNote from "../actions/deleteNote"
+import Context from "../contexts/context";
+import {useContext, useState} from "react";
 
 export default function ListToEditNotes(props) {
+    const {dispatch, list, setEditMode} = useContext(Context);
+    //Состояния. которые будут определены в компоненте и отправлены в форму обновления
+    const [isUpdate, setIsUpdate] = useState(false);
+    const [itemNote, setItemNote] = useState({});
     const onRemoveNote = (id) => {
-        props.dispatch(deleteNote(id))
-        if (!(props.list.length - 1)) props.setEditMode(false)
+        dispatch(deleteNote(id)); //Отправить действие удаление задачи по id
+        if (!(list.length - 1)) setEditMode(false); //При удалении всех задач отключить режим редактирования
     }
     const onEditNote = (idParam) => {
-        props.setIsUpdate(true);
-        props.setID(idParam);
-        props.setItemNote( props.list.find(elem => elem.id === idParam) );
+        setIsUpdate(true); //Активировать модульное окно текстового редактора
+        setItemNote( list.find(elem => elem.id === idParam) ); //Найти объект задачи по id и записать в itemNote
     }
     return (
-        <>
+        <Context.Provider value={{dispatch, setIsUpdate, isUpdate, itemNote}}>
             <ul className="list-to-do">
-                {props.list.map(
+                {list.map(
                     (elem, i) => 
                     (<li className="list-to-do__elem" key={i}>
                         <label className="list-to-do__label">
@@ -32,7 +37,7 @@ export default function ListToEditNotes(props) {
                     </li>)
                 )}
             </ul>
-            <FormUpdateNotes {...props} item={props.itemNote.result}/>
-        </>  
+            <FormUpdateNotes />
+        </Context.Provider>  
     )
 }

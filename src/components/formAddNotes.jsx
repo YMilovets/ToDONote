@@ -1,32 +1,36 @@
-import React, {useRef, useState} from 'react'
+import React, {useRef, useState, useContext} from 'react'
 import setNote from "../actions/setNote"
 import setNewID from "../actions/setNewID"
+import Context from "../contexts/context"
 
 export default function FormAddNotes(props) {
-    const [alert, setAlert] = useState(false)
-    const edited = props.isEdit ? " form-notes--active" : "";
-    const alertMsg = alert ? " form-notes__text--alert" : "";
-    const textNote = useRef()
+    const [alert, setAlert] = useState(false); //состояние отображения сообщения об ошибке
+    //idPos - приращение уникального ключа id
+    const {dispatch, isEditor, setIsEditor, idPos: id} = useContext(Context);
+    const edited = isEditor ? " form-notes--active" : ""; //Установка класса отображения html-элемента текстового редактора
+    const alertMsg = alert ? " form-notes__text--alert" : ""; //Установка класса отображения html-элемента сообщения об ошибке
+    const textNote = useRef(); //Ссылка на текстовое поле задачи
+    //Обработчик добавления новой задачи
     const onAddNote = (e) => {
         const result = textNote.current.value.trim();
-        const id = props.idPos;
-        const checked = false;
+        const checked = false; //Устанавливаем атрибут задачи на "Не выполнено"
         e.preventDefault();
-
+        //Проверка на наличие текстовом поле введенных данных
         if (result.length > 0) {
-            setAlert(false);
-            props.dispatch(setNote(result, id, checked));
-            props.dispatch(setNewID());
-            props.setIsEdit(false);
-            textNote.current.value = "";
+            setAlert(false); //Очистить отображение сообщения об ошибке
+            dispatch(setNote(result, id, checked)); //Отправить действие записи новой задачи
+            dispatch(setNewID()); //Увеличить приращение ключа id на 1
+            setIsEditor(false); //Убрать модульное окно текстового редактора
+            textNote.current.value = ""; //Очистить текстовое поле
         }
-        else setAlert(true);
+        else setAlert(true); //Иначе вывести сообщение об ошибке
     }
+    //Обработчик закрытия формы без сохранения данных
     const onCloseForm = (e) => {
         e.preventDefault();
-        props.setIsEdit(false);
-        setAlert(false);
-        textNote.current.value = "";
+        setIsEditor(false); //Убрать модульное окно текстового редактора
+        setAlert(false); //Очистить отображение сообщения об ошибке
+        textNote.current.value = ""; //Очистить текстовое поле
     }
     const onChangeNote = () => {
         setAlert(false);
