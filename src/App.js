@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import "./App.css";
 import FormAddNodes from "./components/formAddNotes";
 import ListToDoNotes from "./components/listToDoNotes"
@@ -14,11 +14,7 @@ function App() {
   const {listNotes: list, id: idPos} = useSelector(state => state.addNoteReducer);
   const [isEditor, setIsEditor] = useState(false);  //состояние запуска текстового редактора
   const [editMode, setEditMode] = useState(false);  //режим состояния редактирования
-  useEffect(() => {  
-    return () => {    
-      dispatch({type: "SAVE_DATA_STATE"})
-    }
-  })
+
   //Обработчик события запуска формы текстового редактора
   const onAddForm = () => {
     setIsEditor(true);

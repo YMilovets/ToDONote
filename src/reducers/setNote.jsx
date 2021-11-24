@@ -1,7 +1,6 @@
-const result = JSON.parse(localStorage.getItem("listNotes"));
 const defaultState = {
-    listNotes: result || [],
-    id: +localStorage.getItem("idPos")
+    listNotes: [],
+    id: 0
 }
 export default function addNoteReducer (state = defaultState, action) {
     let arr;
@@ -27,11 +26,6 @@ export default function addNoteReducer (state = defaultState, action) {
                 return elem;
             })
             return {...state, listNotes: arr};
-        case "SAVE_DATA_STATE":
-            const notes = JSON.stringify(state.listNotes);
-            localStorage.setItem("listNotes", notes);
-            localStorage.setItem("idPos", state.id);
-            return state;
         default: return state
     }
 }
