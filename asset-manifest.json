@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/ToDONote/static/css/main.1e30ef66.chunk.css",
+    "main.js": "/ToDONote/static/js/main.815baae1.chunk.js",
+    "main.js.map": "/ToDONote/static/js/main.815baae1.chunk.js.map",
+    "runtime-main.js": "/ToDONote/static/js/runtime-main.d3b7903c.js",
+    "runtime-main.js.map": "/ToDONote/static/js/runtime-main.d3b7903c.js.map",
+    "static/js/2.0d50dfe8.chunk.js": "/ToDONote/static/js/2.0d50dfe8.chunk.js",
+    "static/js/2.0d50dfe8.chunk.js.map": "/ToDONote/static/js/2.0d50dfe8.chunk.js.map",
+    "static/js/3.67d402c9.chunk.js": "/ToDONote/static/js/3.67d402c9.chunk.js",
+    "static/js/3.67d402c9.chunk.js.map": "/ToDONote/static/js/3.67d402c9.chunk.js.map",
+    "index.html": "/ToDONote/index.html",
+    "static/css/main.1e30ef66.chunk.css.map": "/ToDONote/static/css/main.1e30ef66.chunk.css.map",
+    "static/js/2.0d50dfe8.chunk.js.LICENSE.txt": "/ToDONote/static/js/2.0d50dfe8.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/ToDONote/static/media/gilroy-regular.b91b0127.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d3b7903c.js",
+    "static/js/2.0d50dfe8.chunk.js",
+    "static/css/main.1e30ef66.chunk.css",
+    "static/js/main.815baae1.chunk.js"
+  ]
+}
