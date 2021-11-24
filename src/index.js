@@ -2,16 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
 import {Provider} from "react-redux"
 import {createStore} from "redux"
 import reducer from "./reducers"
+
 //Запрашиваем данные с локального хранилища
-const enhancer = localStorage.getItem("storage") ? JSON.parse(localStorage.getItem("storage")) : {};
+const enhancer = window.localStorage.getItem("storage") ? JSON.parse(window.localStorage.getItem("storage")) : {};
 const store = createStore(reducer, enhancer);
 
 store.subscribe(() => {
-  localStorage.setItem("storage", JSON.stringify(store.getState()))
+  window.localStorage.setItem("storage", JSON.stringify(store.getState()))
 })
 ReactDOM.render(
   <Provider store={store}>
